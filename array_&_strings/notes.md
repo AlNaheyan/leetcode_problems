@@ -49,11 +49,11 @@ def findClosestNumber(self, nums: List[int]) -> int:
 ------------------
 ## Longest common Prefix
 ### Approach: 
-    - Find the shortest string length – You iterate through the list to determine the length of the shortest string (maxi), as the longest possible prefix cannot exceed this length.
-    - Iterate character by character – You use a while loop to iterate from index 0 to maxi - 1, comparing characters across all strings at the same position.
-    - Compare each character – Within the loop, you check if all strings have the same character at the current index. If a mismatch is found, you return the substring of any string up to that index.
-    - Increment and continue – If no mismatch is found, you continue checking the next character until reaching maxi.
-    - Return the prefix – If all characters match up to maxi, return the first string sliced up to start, as it contains the longest common prefix
+    - Find the shortest string length - You iterate through the list to determine the length of the shortest string (maxi), as the longest possible prefix cannot exceed this length.
+    - Iterate character by character - You use a while loop to iterate from index 0 to maxi - 1, comparing characters across all strings at the same position.
+    - Compare each character - Within the loop, you check if all strings have the same character at the current index. If a mismatch is found, you return the substring of any string up to that index.
+    - Increment and continue - If no mismatch is found, you continue checking the next character until reaching maxi.
+    - Return the prefix - If all characters match up to maxi, return the first string sliced up to start, as it contains the longest common prefix
 
 ### Runtime:
     - O(N*N) = O(N^2) because we have 2 iteration, a for loop inside a while loop. 
@@ -75,7 +75,30 @@ def findClosestNumber(self, nums: List[int]) -> int:
             start += 1
         return strs[0][:start]
 ```
-
-
 ------------------
+## 121: Best time to buy and sell a stock
+### Approach:
+	- Use two pointers - Start with slow at day 0 (buy day) and fast at day 1 (sell day) to track potential transactions.
+	- Calculate profit - At each step, compute profit = prices[fast] - prices[slow] to see if selling at fast gives a better result.
+	- Update max profit - If selling at fast is profitable, update best with the maximum profit found so far.
+	- Move the buy day if needed - if the price at fast is lower than slow, update slow = fast to consider a new potential buy day.
+	- Return the best profit - Continue until the end of the list, then return best, which holds the highest possible profit. If no profit is possible, return 0
+### Runtime:
+    - O(N): One while loop that checks over the array
 
+### Solution:
+```py
+    def maxProfit(self, prices: List[int]) -> int:
+        slow = 0
+        fast = 1
+        best = 0
+        while fast < len(prices):
+            profit = prices[fast] - prices[slow]
+            if prices[slow] < prices[fast]:
+                best = max(profit, best)
+            else:
+                slow = fast
+            fast += 1
+        return best
+```
+------------------

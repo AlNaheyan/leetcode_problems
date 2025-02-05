@@ -9,3 +9,25 @@
 
 ### Time Complexity:
     - O(N) since we are iterating through both loop once during the while loop and we checking len(t). So O(N+N) = O(N)
+
+### solution:
+```py
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        p1 = 0
+        p2 = 0
+        counter = 0
+
+        while p1 < len(s) and p2 < len(t):
+            if s[p1] == t[p2]:
+                p1 += 1
+                counter += 1
+            p2 += 1
+        return (counter) == len(s)
+```
+
+### runtime:
+    - o(n)
+------------------
+
+
