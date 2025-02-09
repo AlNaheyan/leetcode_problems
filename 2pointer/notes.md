@@ -30,4 +30,46 @@ class Solution:
     - o(n)
 ------------------
 
+## 125. Valid Palidrome
+### Approach:
+    - Handle edge case – If the string is just a space, return True immediately.
+	- Use two pointers – Set L at the start and R at the end of the string to compare characters.
+	- Skip non-alphanumeric characters – Move L forward and R backward if they point to non-alphanumeric characters.
+    - Compare characters – Convert both characters to lowercase and check if they match. If they don’t, return False.
+	- Return result – If all valid characters match, return True after checking the entire string
+
+### Solution:
+```py
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        if s == " ":
+            return True
+
+        L = 0
+        R = len(s) - 1
+        isPal = True
+
+        while L < R:
+            if not (s[L].isalnum()):
+                L += 1
+                continue
+            if not (s[R].isalnum()):
+                R -= 1
+                continue
+            if s[L].lower() != s[R].lower():
+                return False
+            L += 1
+            R -= 1
+        return isPal
+```
+
+### runtime:
+    - o(n)
+
+------------------
+
+	•	Check if s and t have the same length. If not, return False immediately since they can’t be anagrams.
+	•	Use a hash table (tab) to count the occurrences of each character in s.
+	•	Loop through t and decrease the count of each character in tab. If a character is missing or its count drops below zero, return False.
+	•	If all character counts balance out to zero, return True, meaning s and t are anagrams
 

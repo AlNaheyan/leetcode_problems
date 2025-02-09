@@ -38,3 +38,39 @@ class Solution:
     - o(n), singe for loop to check over each char in the roman word
 
 ------------------
+
+## 242. Valid Anagram
+### Apprach:
+	- Check if s and t have the same length. If not, return False immediately since they can’t be anagrams.
+	- Use a hash table (tab) to count the occurrences of each character in s.
+	- Loop through t and decrease the count of each character in tab. If a character is missing or its count drops below zero, return False.
+	- If all character counts balance out to zero, return True, meaning s and t are anagrams
+
+### solution:
+```py
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
+
+        tab = {}
+        
+        for char in s:
+            if char not in tab:
+                tab[char] = 1
+            else:
+                tab[char] += 1
+        print(tab)
+        for char in t:
+            if char not in tab:
+                return False
+            tab[char] -= 1
+            if tab[char] < 0:
+                return False
+        return True
+```
+
+### runtime:
+    - o(n)
+
+------------------
