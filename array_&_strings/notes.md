@@ -102,3 +102,55 @@ def findClosestNumber(self, nums: List[int]) -> int:
         return best
 ```
 ------------------
+## 75. Sort colors
+### Appraoch:
+    - THIS IS JUST A SIMPLE SELECTION SORT
+    - Loop through the array to find the smallest element and move it to its correct position (like selection sort).
+	- For each position i, find the minimum value in the remaining unsorted part of the array starting from index i+1.
+	- Swap the current element at index i with the smallest element found in the unsorted part of the array.
+	- Continue this process until the whole array is sorted.
+	- This solution works by sorting the array in-place without using any additional space (except for temporary variables used in swaps).
+
+
+### Solution:
+```py
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        n = len(nums)
+        for i in range(n):
+            min_index = i
+            for j in range(i + 1, n):
+                if nums[j] < nums[min_index]:
+                    min_index = j
+            nums[i], nums[min_index] = nums[min_index], nums[i]
+        print(nums)
+```
+
+### runtime:
+    - o(n^2)
+
+------------------
+## 344. reverse string
+### Apprach:
+	- Two pointers: Start with two pointers: one (p1) at the beginning of the string and the other (p2) at the end of the string.
+	- Swap elements: While p1 is less than p2, swap the elements at p1 and p2.
+	- Move pointers: After each swap, increment p1 and decrement p2 to move towards the center of the string.
+	- Repeat the process until the pointers meet or cross, meaning the string has been reversed.
+	- This approach modifies the input array s in place, requiring O(1) extra memory
+
+### solution:
+```py
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        p1 = 0
+        p2 = len(s) - 1
+        while p2 > p1:
+            s[p1], s[p2] = s[p2], s[p1]
+            p1 += 1
+            p2 -= 1
+```
+
+### runtime:
+    - o(n)
+    
+------------------

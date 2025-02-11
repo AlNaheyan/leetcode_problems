@@ -67,9 +67,80 @@ class Solution:
     - o(n)
 
 ------------------
+## 88. Merge sorted array
+### Approach:
+    - Start merging from the end of nums1, using three pointers: p1 at m-1 (last valid element of nums1), p2 at n-1 (last element of nums2), and p at m+n-1 (last position of nums1).
+	- Compare elements at p1 and p2, placing the larger one at position p, then move the respective pointer left.
+	- Repeat until either p1 or p2 runs out of elements.
+	- If p2 still has elements left, copy the remaining elements of nums2 into nums1.
+	- Since merging is done in-place, the array remains sorted without extra space
 
-	•	Check if s and t have the same length. If not, return False immediately since they can’t be anagrams.
-	•	Use a hash table (tab) to count the occurrences of each character in s.
-	•	Loop through t and decrease the count of each character in tab. If a character is missing or its count drops below zero, return False.
-	•	If all character counts balance out to zero, return True, meaning s and t are anagrams
+### Solution:
+```py
+class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        p1 = m
+        tot = m + n
+        p2 = 0
+        while tot > p1:
+            nums1[p1] = nums2[p2]
+            p1 += 1
+            p2 += 1
+        return nums1.sort()
+```
+### runtime: 
+    - o(n)
+------------------
+## 167. two sum II - input array is sorted
+### Approach:
+    - Use two pointers, left starting at the beginning and right at the end of the sorted array.
+	- Compute the sum of numbers[left] and numbers[right].
+	- If the sum is less than the target, move left rightward; if it’s greater, move right leftward.
+	- If the sum equals the target, return the 1-based indices [left + 1, right + 1].
+	- Repeat until the correct pair is found (guaranteed to exist).
+
+### Solution:
+```py
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        left = 0
+        right = len(numbers) - 1
+        while left < right:
+            total = numbers[left] + numbers[right]
+            if total < target:
+                left += 1
+            elif total > target:
+                right -= 1
+            else:
+                return [left + 1 , right + 1]
+```
+
+### runtime:
+    - o(n)
+    
+------------------
+## 344. reverse string
+### Apprach:
+	- Two pointers: Start with two pointers: one (p1) at the beginning of the string and the other (p2) at the end of the string.
+	- Swap elements: While p1 is less than p2, swap the elements at p1 and p2.
+	- Move pointers: After each swap, increment p1 and decrement p2 to move towards the center of the string.
+	- Repeat the process until the pointers meet or cross, meaning the string has been reversed.
+	- This approach modifies the input array s in place, requiring O(1) extra memory
+
+### solution:
+```py
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        p1 = 0
+        p2 = len(s) - 1
+        while p2 > p1:
+            s[p1], s[p2] = s[p2], s[p1]
+            p1 += 1
+            p2 -= 1
+```
+
+### runtime:
+    - o(n)
+    
+------------------
 
