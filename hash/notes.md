@@ -73,5 +73,40 @@ class Solution:
 ### runtime:
     - o(n)
 
+------------------
+
+## 383. ransom note
+### Approach:
+    - Use a dictionary to count magazine letters: Create a dictionary (dict) to store the frequency of each letter in magazine.
+	- Populate the dictionary: Iterate through magazine, increasing the count of each letter in dict.
+	- Check ransomNote letters: Iterate through ransomNote and check if each letter exists in dict with a count greater than zero.
+	- Reduce count or remove letters: If a letter is found, decrease its count in dict. If a letter’s count reaches zero, remove it.
+	- Return result: If all letters in ransomNote are found in dict, return True; otherwise, return False.
+
+
+### solution:
+```py
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:      
+        dict = {}
+        for letter in magazine:
+            if letter in dict:
+                dict[letter] += 1
+            else:
+                dict[letter] = 1
+        
+        for letter in ransomNote:
+            if letter not in dict:
+                return False
+            elif dict[letter] == 1:
+                del dict[letter]
+            else:
+                dict[letter] -= 1
+        return True
+```
+
+### runtime: 
+    - o(n+m)
+
 
 ------------------
