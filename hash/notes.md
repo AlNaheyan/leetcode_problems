@@ -110,3 +110,39 @@ class Solution:
 
 
 ------------------
+
+## 1189. Maximum numbers of Balloons
+### Approach:
+    - Count the occurrences of each character in the input string using a dictionary.
+	- For the word “balloon,” note that ‘l’ and ‘o’ appear twice, so divide their counts by 2.
+	- Check the minimum count for each required character (‘b’, ‘a’, ‘l’, ‘o’, ‘n’).
+	- Return the minimum count, which represents how many “balloon” words can be formed
+
+### solution:
+```py
+class Solution:
+    def maxNumberOfBalloons(self, text: str) -> int:
+        dic = {}
+        for i in text:
+            if i in dic:
+                dic[i] += 1
+            else:
+                dic[i] = 1
+
+        print(dic)
+        # setup individual counts
+
+        b = dic.get('b', 0)
+        a = dic.get('a', 0)
+        l = dic.get('l', 0) // 2
+        o = dic.get('o', 0) // 2
+        n = dic.get('n', 0)
+        
+        return (min(b, a, l, o, n))
+        
+```
+### runtime:
+    - o(n)
+    
+
+------------------
