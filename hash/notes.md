@@ -146,3 +146,32 @@ class Solution:
     
 
 ------------------
+## Split the array
+### Approach:
+    - Count the frequency of each number: Use a dictionary to store how many times each element appears in the array.
+	- Check for invalid frequencies: Iterate through the frequency values and if any number appears more than twice, return False—because such a number cannot be split into two distinct parts.
+	- Return the result: If all elements appear at most twice, return True, as it is possible to split the array into two groups with distinct elements.
+
+### Solution:
+```py
+class Solution:
+    def isPossibleToSplit(self, nums: List[int]) -> bool:
+        dic = {}
+        for i in nums:
+            if i in dic:
+                dic[i] += 1
+            else:
+                dic[i] = 1
+        print(dic)
+
+        for val in dic.values():
+            if val > 2:
+                return False
+        return True
+
+```
+
+### runtime:
+    - o(n)
+
+------------------
