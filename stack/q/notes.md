@@ -34,3 +34,40 @@ class Solution:
     - o(n)
 
 ------------------
+
+## 20. valid parenthesis
+### Approach:
+    - Use a stack to track open brackets: Create an empty list (open) to push open brackets as you encounter them in the string.
+	- Match closing brackets with the stack: For each closing bracket, check if the stack is empty. If it is, return False (no corresponding open bracket). Otherwise, pop the stack and ensure the popped open bracket matches the corresponding type of closing bracket.
+	- Check if all brackets are matched: After iterating through the string, if the stack is empty, return True (all brackets are valid). If the stack still contains open brackets, return False.
+	- Use a dictionary for matching pairs: Use a dictionary (uhh) to map each closing bracket to its corresponding opening bracket for quick lookups.
+### Solution:
+```py
+class Solution:
+    def isValid(self, s: str) -> bool:
+        open = []
+
+        uhh = {')': '(', '}': '{', ']': '['}
+
+        for i in s:
+            if i in uhh.values():
+                open.append(i)
+            elif i in uhh:
+                if len(open) == 0:
+                    return False
+                first = open.pop()
+                if first != uhh[i]:
+                    return False
+                    
+        if len(open) == 0:
+            return True
+        else:
+            return False
+            
+
+```
+
+### runtime:
+    - o(n)
+
+------------------
